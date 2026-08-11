@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>⚙️ Admin Dashboard</h1>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="orders.html">Orders</a>
+    </nav>
+</header>
+
+<main>
+
+    <h2>Add Product</h2>
+
+    <form id="productForm">
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Product Name"
+            required
+        >
+
+        <br><br>
+
+        <input
+            type="text"
+            id="description"
+            placeholder="Description"
+            required
+        >
+
+        <br><br>
+
+        <input
+            type="number"
+            id="price"
+            placeholder="Price"
+            required
+        >
+
+        <br><br>
+
+        <input
+            type="number"
+            id="quantity"
+            placeholder="Quantity"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit">
+            Add Product
+        </button>
+
+    </form>
+
+    <hr>
+
+    <h2>Products</h2>
+
+    <div id="products">
+        Loading...
+    </div>
+
+    <hr>
+
+    <h2>All Orders</h2>
+
+    <div id="allOrders">
+        Loading...
+    </div>
+
+</main>
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>
