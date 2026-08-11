@@ -1,0 +1,96 @@
+const API_URL = "http://localhost:8080/api";
+
+async function loadProducts() {
+
+    try {
+
+        const response = await fetch(`${API_URL}/products`);
+
+        const products = await response.json();
+
+        const container = document.getElementById("products");
+
+        container.innerHTML = "";
+
+        products.forEach(product => {
+
+            const div = document.createElement("div");
+
+            div.className = "product";
+
+            div.innerHTML = `
+                <h3>${product.name}</h3>
+
+                <p>${product.description}</p>
+
+                <p><strong>₹${product.price}</strong></p>
+
+                <p>Stock: ${product.quantity}</p>
+
+                <button onclick="addToCart(${product.id})">
+                    Add to Cart
+                </button>
+            `;
+
+            container.appendChild(div);
+        });
+
+    } catch (error) {
+
+        document.getElementById("products").innerHTML =
+            "<p>Unable to load products.</p>";
+
+        console.error(error);
+    }
+}
+
+
+function addToCart(productId) {
+
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+
+        alert("Please login first.");
+
+        window.location.href = "login.html";
+
+        return;
+    }
+
+    fetch(`${API_URL}/cart`, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            userId: Number(userId),
+
+            productId: productId,
+
+            quantity: 1
+
+        })
+
+    })
+    .then(response => response.json())
+    .then(() => {
+
+        alert("Product added to cart!");
+
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        alert("Unable to add product.");
+
+    });
+}
+
+
+loadProducts();
